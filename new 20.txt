@@ -1,0 +1,27 @@
+
+PostUser 
+table = User Registration
+  ID = long
+  Name = string
+  Mobile No. = long
+  Email = string
+  Password = string
+  Created date = string
+  Modified date = string
+  Delete date = string
+  Status : active /not = Boolean
+  
+  Request Body for user registration
+   Name = string
+  Mobile No. = long
+  Email = string
+  Password = string
+  
+  Response body for user registration
+  Id = long
+  Name = string
+  Mobile No. = long
+  Email = string
+  Password = string
+ 
+  
