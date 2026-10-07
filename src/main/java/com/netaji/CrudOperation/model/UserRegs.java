@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
+//model class 
 @Entity
 @Table(name = "UserRegs_tb")
 public class UserRegs {
