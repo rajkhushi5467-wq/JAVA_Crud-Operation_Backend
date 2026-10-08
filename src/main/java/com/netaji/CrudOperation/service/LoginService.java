@@ -29,8 +29,18 @@ public class LoginService {
         String pwd = loginRequest.getPassword();
 
         //Database store login data
-        Optional<UserRegs> userResponse = userOperationService.getUserById(id);
-        if(userResponse.isPresent()) {
+        UserRegs userResponse = userOperationService.getUserById(id);
+        if(userResponse != null){
+            if (id == userResponse.getId() && pwd.equals(userResponse.getPassword())) {
+                return true;
+            }else{
+                return false;
+            }
+        }else {
+        return false;
+
+        }
+        /*if(userResponse.isPresent()) {
             UserRegs userRegs = userResponse.get();
             if(userRegs.isStatus()==false){
                 return false;
@@ -44,16 +54,16 @@ public class LoginService {
             }
         }else{
             return false;
-        }
+        }*/
 
     }
 
     //Delete profilr service method
     public boolean DeleteMethodService(long id){
-        Optional<UserRegs> userResponse = userOperationService.getUserById(id);
+        UserRegs userResponse = userOperationService.getUserById(id);
 
-        if(userResponse.isPresent()){
-            UserRegs userRegs = userResponse.get();
+        if(userResponse != null){
+            UserRegs userRegs = userResponse;
             if(userRegs.isStatus() == true){
                 userRegs.setStatus(false);
                 userRegs.setDeleteDate(dateString);

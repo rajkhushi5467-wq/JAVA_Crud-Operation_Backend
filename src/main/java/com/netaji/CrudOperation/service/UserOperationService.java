@@ -49,8 +49,20 @@ public class UserOperationService {
         return getAllUsers;
     }
 
-    public  Optional<UserRegs> getUserById(long id) {
+    public  UserRegs getUserById(long id) {
+
         Optional<UserRegs> getUserById =userRepository.findById(id);
-        return getUserById;
+        if(getUserById.isPresent()){
+            UserRegs userRegs = getUserById.get();
+            if(userRegs.isStatus() == true){
+                return userRegs;
+            }
+            else{
+                return null;
+            }
+        }else{
+            return null;
+        }
+
     }
 }

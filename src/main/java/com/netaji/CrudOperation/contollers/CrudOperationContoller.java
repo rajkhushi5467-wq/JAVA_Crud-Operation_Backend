@@ -54,8 +54,8 @@ public class CrudOperationContoller {
     // http://localhost:8088/Crud/1791220827482
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable("id") long id) {
-        Optional<UserRegs> userResponse = userOperationService.getUserById(id);
-        if (userResponse.isPresent()) {
+        UserRegs userResponse = userOperationService.getUserById(id);
+        if (userResponse != null) {
             ApiResponse apiResponse = new ApiResponse();
             apiResponse.setStatusCode(201);
             apiResponse.setMassage("user get successfully");
