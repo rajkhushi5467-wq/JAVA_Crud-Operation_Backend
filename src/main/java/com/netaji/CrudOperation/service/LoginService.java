@@ -51,13 +51,20 @@ public class LoginService {
     //Delete profilr service method
     public boolean DeleteMethodService(long id){
         Optional<UserRegs> userResponse = userOperationService.getUserById(id);
+
         if(userResponse.isPresent()){
             UserRegs userRegs = userResponse.get();
-            userRegs.setStatus(false);
-            userRegs.setDeleteDate(dateString);
-            System.out.println(userRegs);
-            userRepository.save(userRegs);
-            return true;
+            if(userRegs.isStatus() == true){
+                userRegs.setStatus(false);
+                userRegs.setDeleteDate(dateString);
+                //System.out.println(userRegs);
+                userRepository.save(userRegs);
+                return true;
+            }
+            else{
+                return false;
+            }
+
         }else{
             return false;
         }

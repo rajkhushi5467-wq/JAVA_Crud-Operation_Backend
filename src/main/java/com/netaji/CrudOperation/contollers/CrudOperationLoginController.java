@@ -54,11 +54,11 @@ public class CrudOperationLoginController {
         }
 else{
             ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setStatusCode(200);
+            apiResponse.setStatusCode(204);
             apiResponse.setMassage("Data not found");
             apiResponse.setError(null);
             apiResponse.setResponse("NULL");
-            return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+            return new ResponseEntity<>(apiResponse, HttpStatus.NO_CONTENT);
         }
 
     }
