@@ -1,6 +1,7 @@
 package com.netaji.CrudOperation.service;
 
 import com.netaji.CrudOperation.mapper.LoginRequest;
+import com.netaji.CrudOperation.mapper.UserRequest;
 import com.netaji.CrudOperation.mapper.UserResponse;
 import com.netaji.CrudOperation.model.UserRegs;
 import com.netaji.CrudOperation.repository.UserRepository;
@@ -40,22 +41,6 @@ public class LoginService {
         return false;
 
         }
-        /*if(userResponse.isPresent()) {
-            UserRegs userRegs = userResponse.get();
-            if(userRegs.isStatus()==false){
-                return false;
-            }
-            else{
-                if (id == userResponse.get().getId() && pwd.equals(userResponse.get().getPassword())) {
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        }else{
-            return false;
-        }*/
-
     }
 
     //Delete profilr service method
@@ -78,10 +63,40 @@ public class LoginService {
         }else{
             return false;
         }
-
-
     }
+    //Update profile
+    // Update profile
+    public UserResponse updateUserService(UserRequest userRequest, long id) {
+        UserRegs idUser = userOperationService.getUserById(id);
+        UserResponse user = new UserResponse();
+        if(idUser != null){
+            user.setEmail(userRequest.getEmail());
+            user.setId(idUser.getId());
+            user.setName(userRequest.getName());
+            user.setPassword(userRequest.getPassword());
+            user.setMobileNo(userRequest.getMobileNo());
+            //
+            UserRegs user1= new UserRegs();
+            user1.setId(idUser.getId());
+            user1.setName(userRequest.getName());
+            user1.setEmail(userRequest.getEmail());
+            user1.setMobileNo(userRequest.getMobileNo());
+            user1.setPassword(userRequest.getPassword());
+            user1.setCreatedDate(idUser.getCreatedDate());
+            user1.setModifiedDate(dateString);
+            user1.setDeleteDate(null);
+            user1.setStatus(true);
 
+            userRepository.save(user1);
+            //
+        }
+        else{
+            return null;
+        }
+
+
+        return user;
+    }
 
 }
 //  "id": 1791394167804,,khuc

@@ -3,6 +3,8 @@ package com.netaji.CrudOperation.contollers;
 
 import com.netaji.CrudOperation.mapper.ApiResponse;
 import com.netaji.CrudOperation.mapper.LoginRequest;
+import com.netaji.CrudOperation.mapper.UserRequest;
+import com.netaji.CrudOperation.mapper.UserResponse;
 import com.netaji.CrudOperation.model.UserRegs;
 import com.netaji.CrudOperation.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+
+@CrossOrigin("*")
 public class CrudOperationLoginController {
 
     @Autowired
@@ -59,6 +63,28 @@ else{
             apiResponse.setError(null);
             apiResponse.setResponse("NULL");
             return new ResponseEntity<>(apiResponse, HttpStatus.NO_CONTENT);
+        }
+
+    }
+//Update profile
+    //http:/localhost:8088/user/Update/
+    @PostMapping("/Update/{id}")
+    public ResponseEntity<?> updateprofile(@PathVariable long id, @RequestBody UserRequest userRequest){
+        UserResponse userRes = loginService.updateUserService(userRequest,id);
+        if(userRes != null){
+            ApiResponse res = new ApiResponse();
+            res.setStatusCode(200);
+            res.setMassage("Update successfully");
+            res.setError(null);
+            res.setResponse(userRes);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }else{
+            ApiResponse res = new ApiResponse();
+            res.setStatusCode(204);
+            res.setMassage("Data not found");
+            res.setError(null);
+            res.setResponse("Null");
+            return new ResponseEntity<>(res, HttpStatus.NO_CONTENT);
         }
 
     }

@@ -18,6 +18,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/Crud")
+
+@CrossOrigin("*")
 public class CrudOperationContoller {
 
     @Autowired
